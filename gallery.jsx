@@ -29,8 +29,14 @@ function DayStrip() {
     };
     raf = requestAnimationFrame(tick);
 
+    const onTouch = (e) => e.preventDefault();
+    wrap.addEventListener("touchstart", onTouch, { passive: false });
+    wrap.addEventListener("touchmove", onTouch, { passive: false });
+
     return () => {
       cancelAnimationFrame(raf);
+      wrap.removeEventListener("touchstart", onTouch);
+      wrap.removeEventListener("touchmove", onTouch);
     };
   }, []);
 
