@@ -8,38 +8,6 @@ const { useEffect, useRef } = React;
 function DayStrip() {
   const wrapRef = useRef(null);
 
-  useEffect(() => {
-    const wrap = wrapRef.current;
-    if (!wrap) return;
-
-    let raf = 0;
-    let lastT = performance.now();
-    const speed = 28; // px / second — gentle drift
-
-    const tick = (t) => {
-      const dt = t - lastT;
-      lastT = t;
-      const half = wrap.scrollWidth / 2;
-      if (half > 0) {
-        let next = wrap.scrollLeft + (speed * dt / 1000);
-        if (next >= half) next -= half;
-        wrap.scrollLeft = next;
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-
-    const onTouch = (e) => e.preventDefault();
-    wrap.addEventListener("touchstart", onTouch, { passive: false });
-    wrap.addEventListener("touchmove", onTouch, { passive: false });
-
-    return () => {
-      cancelAnimationFrame(raf);
-      wrap.removeEventListener("touchstart", onTouch);
-      wrap.removeEventListener("touchmove", onTouch);
-    };
-  }, []);
-
   const moments = [
     { id: "day-1", src: "uploads/day-1.jpg", hint: "" },
     { id: "day-2", src: "uploads/day-2.jpg", hint: "" },

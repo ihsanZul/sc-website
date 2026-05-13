@@ -870,20 +870,20 @@ section { position: relative; }
   position: relative;
   margin: 0 -56px;
   padding: 0 56px;
-  overflow-x: auto;
-  overflow-y: hidden;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  touch-action: none;
+  overflow: hidden;
 }
-.day-strip-wrap::-webkit-scrollbar { display: none; }
 @media (max-width: 720px) { .day-strip-wrap { margin: 0 -24px; padding: 0 24px; } }
 
 .day-strip {
   display: flex;
-  gap: 24px;
   width: max-content;
-  padding-right: 56px;
+  animation: day-strip-scroll 60s linear infinite;
+  will-change: transform;
+}
+.day-strip > .day-card { margin-right: 24px; }
+@keyframes day-strip-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-50%, 0, 0); }
 }
 
 .day-card {
