@@ -1126,6 +1126,15 @@ image-slot[data-over]::part(ring) {
   letter-spacing: 0.16em;
   color: var(--ink-mute);
 }
+@media (max-width: 600px) {
+  .campus-caption {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .campus-caption .meta {
+    font-size: 17px;
+  }
+}
 
 /* ---------- Numbers / proof ---------- */
 .proof {
