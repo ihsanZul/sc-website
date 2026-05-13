@@ -12,7 +12,6 @@ function DayStrip() {
     const wrap = wrapRef.current;
     if (!wrap) return;
 
-    let hovering = false;
     let raf = 0;
     let lastT = performance.now();
     const speed = 28; // px / second — gentle drift
@@ -20,54 +19,18 @@ function DayStrip() {
     const tick = (t) => {
       const dt = t - lastT;
       lastT = t;
-      if (!hovering) {
-        const half = wrap.scrollWidth / 2;
-        if (half > 0) {
-          let next = wrap.scrollLeft + (speed * dt / 1000);
-          if (next >= half) next -= half;
-          wrap.scrollLeft = next;
-        }
+      const half = wrap.scrollWidth / 2;
+      if (half > 0) {
+        let next = wrap.scrollLeft + (speed * dt / 1000);
+        if (next >= half) next -= half;
+        wrap.scrollLeft = next;
       }
       raf = requestAnimationFrame(tick);
     };
     raf = requestAnimationFrame(tick);
 
-    const onEnter = () => { hovering = true; };
-    const onLeave = () => { hovering = false; lastT = performance.now(); };
-
-    // Convert vertical wheel input → horizontal scroll, only while hovering
-    const onWheel = (e) => {
-      if (!hovering) return;
-      const absX = Math.abs(e.deltaX);
-      const absY = Math.abs(e.deltaY);
-      if (absY > absX) {
-        e.preventDefault();
-        let next = wrap.scrollLeft + e.deltaY;
-        const half = wrap.scrollWidth / 2;
-        if (next < 0) next += half;
-        if (next >= half) next -= half;
-        wrap.scrollLeft = next;
-      }
-    };
-
-    // Keep manual scroll wrapped within the first copy for seamless looping
-    const onScroll = () => {
-      const half = wrap.scrollWidth / 2;
-      if (half > 0 && wrap.scrollLeft >= half) {
-        wrap.scrollLeft -= half;
-      }
-    };
-
-    wrap.addEventListener("mouseenter", onEnter);
-    wrap.addEventListener("mouseleave", onLeave);
-    wrap.addEventListener("wheel", onWheel, { passive: false });
-    wrap.addEventListener("scroll", onScroll, { passive: true });
     return () => {
       cancelAnimationFrame(raf);
-      wrap.removeEventListener("mouseenter", onEnter);
-      wrap.removeEventListener("mouseleave", onLeave);
-      wrap.removeEventListener("wheel", onWheel);
-      wrap.removeEventListener("scroll", onScroll);
     };
   }, []);
 

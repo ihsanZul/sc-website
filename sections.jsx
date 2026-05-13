@@ -381,7 +381,7 @@ function Programs() {
         <Reveal delay={1}>
           <div className="programs">
             {items.map(p => (
-              <a className="program" key={p.idx} href="#admissions">
+              <div className="program" key={p.idx}>
                 <div className="idx">{p.idx} —</div>
                 <div className="thumb">
                   <image-slot
@@ -400,7 +400,7 @@ function Programs() {
                     <path d="M4 12L12 4M12 4H6M12 4V10" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"/>
                   </svg>
                 </div>
-              </a>
+              </div>
             ))}
           </div>
         </Reveal>
