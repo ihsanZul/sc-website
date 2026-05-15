@@ -276,12 +276,6 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   .nav-logo .name { display: none; }
 }
 
-/* Hamburger only on truly small screens */
-@media (max-width: 920px) {
-  .nav-links { display: none; }
-  .nav-burger { display: flex; }
-}
-
 /* ---------- Hamburger / Mobile drawer ---------- */
 .nav-burger {
   display: none;
@@ -297,6 +291,12 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 }
 .nav-burger:hover { border-color: var(--ink); }
 .nav-burger svg { color: var(--ink); }
+
+/* Hamburger only on truly small screens */
+@media (max-width: 920px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+}
 
 .nav-drawer {
   position: fixed;
