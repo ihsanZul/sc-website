@@ -933,11 +933,12 @@ body.about {
   padding: 64px 56px;
   background: var(--paper);
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 64px;
   border-radius: 4px;
 }
-@media (max-width: 880px) { .reply-card .card { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; } }
+.reply-card .card > * { min-width: 0; }
+@media (max-width: 880px) { .reply-card .card { grid-template-columns: minmax(0, 1fr); padding: 40px 20px; gap: 32px; } }
 
 /* Corner marks (cut here) */
 .reply-card .card::before {
@@ -980,11 +981,12 @@ body.about {
 .reply-card .left h2 {
   font-family: "Instrument Serif", serif;
   font-weight: 400;
-  font-size: clamp(48px, 6.6vw, 104px);
+  font-size: clamp(36px, 6.6vw, 104px);
   line-height: 0.94;
   letter-spacing: -0.015em;
   max-width: 14ch;
   margin-bottom: 32px;
+  overflow-wrap: break-word;
 }
 .reply-card .left h2 .it { font-style: italic; color: var(--accent); }
 .reply-card .left h2 .red { font-style: italic; color: var(--accent-2); }
@@ -1002,11 +1004,15 @@ body.about {
 }
 .reply-card .right .row {
   display: grid;
-  grid-template-columns: 90px 1fr;
-  gap: 20px;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 16px;
   align-items: baseline;
   border-bottom: 1px dotted var(--ink);
   padding-bottom: 16px;
+}
+.reply-card .right .row > * { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 480px) {
+  .reply-card .right .row { grid-template-columns: 1fr; gap: 4px; }
 }
 .reply-card .right .row .k {
   font-family: "JetBrains Mono", monospace;
