@@ -153,7 +153,6 @@ function LetterSpread({ reverse = false, photo, photoCaption, plateLabel, plateN
             <div className="signature-block">
               <span className="sig">{sigText}</span>
               <span className="who">
-                <span className="name">{sigName}</span>
                 {sigRole}
               </span>
             </div>

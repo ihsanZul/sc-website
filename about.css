@@ -280,19 +280,7 @@ body.about {
   color: var(--accent-2);
   line-height: 1;
 }
-.panel-letter .margin .note {
-  border-left: 1px solid var(--rule);
-  padding-left: 14px;
-  margin-top: auto;
-  max-width: 14ch;
-  font-family: "Instrument Serif", serif;
-  font-style: italic;
-  text-transform: none;
-  letter-spacing: 0;
-  font-size: 13px;
-  color: var(--ink-soft);
-  line-height: 1.5;
-}
+.panel-letter .margin .note { display: none; }
 @media (max-width: 720px) { .panel-letter .margin { flex-direction: row; align-items: baseline; gap: 16px; } .panel-letter .margin .note { display: none; } }
 
 /* Letter content */
@@ -492,27 +480,34 @@ body.about {
   gap: 16px;
 }
 .diagram .line {
+  display: grid;
+  grid-template-columns: minmax(0, 11ch) auto 1fr;
+  align-items: baseline;
+  gap: 14px;
   font-family: "Instrument Serif", serif;
-  font-size: clamp(28px, 3.2vw, 44px);
-  line-height: 1.1;
+  font-size: clamp(24px, 3vw, 44px);
+  line-height: 1.15;
   letter-spacing: -0.005em;
 }
 .diagram .line .lhs {
   font-style: italic;
   color: var(--accent-2);
-  display: inline-block;
-  min-width: 8ch;
 }
 .diagram .line .op {
   font-family: "JetBrains Mono", monospace;
   font-style: normal;
   font-size: 16px;
   color: var(--ink-mute);
-  margin: 0 12px;
-  vertical-align: middle;
 }
 .diagram .line .rhs {
   color: var(--ink);
+}
+@media (max-width: 600px) {
+  .diagram .line {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .diagram .line .op { display: none; }
 }
 .diagram .result {
   font-family: "Instrument Serif", serif;
