@@ -4,9 +4,11 @@
    diptych spreads · letter typography · marginalia · postscript
    ============================================================ */
 
-/* Hard overflow guard — every About section is contained to viewport */
-body.about main { overflow-x: clip; }
-body.about section { max-width: 100vw; overflow-x: clip; }
+/* Hard overflow guard — only on mobile where zoom is reset to 1 */
+@media (max-width: 920px) {
+  body.about main { overflow-x: clip; }
+  body.about section { max-width: 100vw; overflow-x: clip; }
+}
 
 /* Slightly warmer paper for the about page only */
 body.about {
