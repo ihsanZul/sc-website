@@ -59,6 +59,10 @@ body {
   font-feature-settings: "ss01", "ss02";
   overflow-x: hidden;
 }
+html { overflow-x: hidden; }
+@media (max-width: 920px) {
+  body { zoom: 1; }
+}
 
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
