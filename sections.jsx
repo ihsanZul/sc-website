@@ -84,32 +84,34 @@ function Nav() {
     return () => { document.body.style.overflow = ""; };
   }, [drawerOpen]);
 
+  const onAboutPage = typeof window !== "undefined" && /about\.html$/i.test(window.location.pathname);
+  const home = onAboutPage ? "index.html" : "";
   const navItems = [
-    { label: "Home", href: "#top" },
-    { label: "About", href: "#about" },
+    { label: "Home", href: onAboutPage ? "index.html" : "#top" },
+    { label: "About", href: "About.html" },
     {
       label: "Gallery",
-      href: "#gallery",
+      href: `${home}#gallery`,
       children: [
-        { label: "The Foundation", href: "#foundation" },
-        { label: "High School Teachers", href: "#hs-teachers" },
-        { label: "Junior High Teachers", href: "#jh-teachers" },
-        { label: "Elementary Teachers", href: "#el-teachers" },
-        { label: "SCBS Teachers", href: "#scbs-teachers" },
-        { label: "Staff", href: "#staff" },
+        { label: "The Foundation", href: `${home}#foundation` },
+        { label: "High School Teachers", href: `${home}#hs-teachers` },
+        { label: "Junior High Teachers", href: `${home}#jh-teachers` },
+        { label: "Elementary Teachers", href: `${home}#el-teachers` },
+        { label: "SCBS Teachers", href: `${home}#scbs-teachers` },
+        { label: "Staff", href: `${home}#staff` },
       ],
     },
     {
       label: "Admission",
-      href: "#admissions",
+      href: `${home}#admissions`,
       children: [
-        { label: "Online Registration", href: "#registration" },
-        { label: "Forms", href: "#forms" },
+        { label: "Online Registration", href: `${home}#registration` },
+        { label: "Forms", href: `${home}#forms` },
       ],
     },
-    { label: "Events", href: "#events" },
-    { label: "Contact", href: "#contact" },
-    { label: "Parents Desk", href: "#parents" },
+    { label: "Events", href: `${home}#events` },
+    { label: "Contact", href: `${home}#contact` },
+    { label: "Parents Desk", href: `${home}#parents` },
   ];
 
   return (
