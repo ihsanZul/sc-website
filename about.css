@@ -1,0 +1,1043 @@
+/* ============================================================
+   About — "A Private Letter"
+   A completely different layout from the homepage:
+   diptych spreads · letter typography · marginalia · postscript
+   ============================================================ */
+
+/* Slightly warmer paper for the about page only */
+body.about {
+  --paper: #F1EADD;          /* a touch warmer than homepage */
+  --paper-edge: #E2D8C5;
+  --ink: #18160F;
+  --ink-soft: #3F3A2E;
+  --ink-mute: #7A7466;
+  --rule: #18160F1A;
+  --margin: #00000010;
+  background: var(--paper);
+  color: var(--ink);
+  /* page-wide vellum texture */
+  background-image:
+    radial-gradient(#00000005 1px, transparent 1.2px),
+    linear-gradient(180deg, #FFFFFF06, transparent 30%);
+  background-size: 3px 3px, 100% 100%;
+}
+
+/* Reading typography for letter bodies */
+.letter-body, .essay-body {
+  font-family: "Newsreader", "EB Garamond", Georgia, serif;
+  font-weight: 400;
+}
+
+/* ============================================================
+   Front matter — letterhead at the top
+   (replaces the "hero" entirely)
+   ============================================================ */
+.letterhead {
+  padding: 168px 0 56px;
+  position: relative;
+}
+.letterhead .shell {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--ink);
+}
+@media (max-width: 880px) { .letterhead .shell { grid-template-columns: 1fr; gap: 16px; } }
+
+.letterhead .crest {
+  display: flex; flex-direction: column; gap: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.letterhead .crest .name {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  margin-bottom: 2px;
+}
+
+.letterhead .center {
+  text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+}
+.letterhead .seal {
+  width: 64px; height: 64px;
+  border: 1px solid var(--ink);
+  border-radius: 50%;
+  display: grid; place-items: center;
+  position: relative;
+  background: var(--paper);
+}
+.letterhead .seal::before, .letterhead .seal::after {
+  content: ""; position: absolute; inset: 5px;
+  border: 1px dashed var(--ink-mute);
+  border-radius: 50%;
+}
+.letterhead .seal::after { inset: 11px; border-style: solid; border-color: var(--accent-2); }
+.letterhead .seal .glyph {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  color: var(--accent-2);
+  position: relative; z-index: 2;
+}
+.letterhead .center .from {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+.letterhead .right {
+  text-align: right;
+  display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.letterhead .right .date {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+/* Big opening "To the reader" line */
+.opening-line {
+  padding: 72px 0 96px;
+}
+.opening-line .shell {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 64px;
+  align-items: end;
+}
+@media (max-width: 880px) { .opening-line .shell { grid-template-columns: 1fr; gap: 24px; } }
+.opening-line .tag {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.opening-line h1 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 88px);
+  line-height: 1.02;
+  letter-spacing: -0.012em;
+  max-width: 20ch;
+}
+.opening-line h1 .it { font-style: italic; color: var(--accent); }
+.opening-line h1 .red { font-style: italic; color: var(--accent-2); }
+
+/* ============================================================
+   Diptych letter spread
+   ============================================================ */
+.spread {
+  padding: 80px 0;
+  border-top: 1px solid var(--rule);
+}
+.spread-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  align-items: start;
+  gap: 0;
+}
+@media (max-width: 980px) {
+  .spread-grid { grid-template-columns: 1fr; }
+}
+
+/* Reverse direction for letter II */
+.spread.reverse .panel-image { order: 2; }
+.spread.reverse .panel-letter { order: 1; }
+@media (max-width: 980px) {
+  .spread.reverse .panel-image { order: 0; }
+  .spread.reverse .panel-letter { order: 0; }
+}
+
+.panel-image {
+  position: sticky;
+  top: 120px;
+  padding: 64px 56px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+}
+@media (max-width: 980px) { .panel-image { position: static; } }
+@media (max-width: 720px) { .panel-image { padding: 40px 24px; } }
+
+/* Top mono label above the card */
+.panel-image .plate-label {
+  align-self: stretch;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 4px;
+}
+.panel-image .plate-label .it {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 18px;
+  color: var(--accent-2);
+}
+
+/* The actual photo card — small, centered, premium */
+.photo-card {
+  position: relative;
+  width: 260px;
+  max-width: 80%;
+  aspect-ratio: 3/4;
+  border-radius: 3px;
+  overflow: hidden;
+  background: var(--paper-edge);
+  box-shadow: 0 30px 60px -30px #00000040, 0 2px 8px #0000001A, 0 0 0 1px #0000000A;
+  transform: rotate(-1.2deg);
+  transition: transform 700ms cubic-bezier(.2,.7,.2,1);
+}
+.spread.reverse .photo-card { transform: rotate(1.2deg); }
+.photo-card:hover { transform: rotate(0); }
+.photo-card image-slot {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  animation: kenBurns 42s ease-in-out infinite alternate;
+  filter: contrast(1.02) saturate(0.95);
+}
+
+/* Photo caption below the card */
+.photo-cap {
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+}
+.photo-cap .it {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 16px;
+  color: var(--ink);
+}
+
+/* Letter panel */
+.panel-letter {
+  padding: 64px 80px 64px 24px;
+  border-left: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: 32px;
+  position: relative;
+}
+@media (max-width: 1200px) { .panel-letter { padding: 56px 48px 56px 16px; grid-template-columns: 36px 1fr; gap: 20px; } }
+@media (max-width: 980px)  { .panel-letter { border-left: 0; border-top: 1px solid var(--rule); padding: 56px 24px; grid-template-columns: 1fr; gap: 24px; } }
+
+/* Side margin gutter */
+.panel-letter .margin {
+  display: flex; flex-direction: column; gap: 24px;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  padding-top: 4px;
+}
+.panel-letter .margin .num {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 28px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent-2);
+  line-height: 1;
+}
+.panel-letter .margin .note {
+  border-left: 1px solid var(--rule);
+  padding-left: 14px;
+  margin-top: auto;
+  max-width: 14ch;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.5;
+}
+@media (max-width: 720px) { .panel-letter .margin { flex-direction: row; align-items: baseline; gap: 16px; } .panel-letter .margin .note { display: none; } }
+
+/* Letter content */
+.panel-letter .salutation {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(34px, 3.6vw, 52px);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  margin-bottom: 32px;
+  color: var(--accent-2);
+  max-width: 18ch;
+}
+
+.letter-body p {
+  font-family: "Newsreader", "EB Garamond", Georgia, serif;
+  font-size: 18px;
+  line-height: 1.62;
+  color: var(--ink);
+  margin-bottom: 16px;
+  max-width: 56ch;
+}
+.letter-body p:first-of-type::first-letter {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 88px;
+  line-height: 0.82;
+  float: left;
+  padding: 6px 14px 0 0;
+  color: var(--accent-2);
+}
+
+.letter-body .pull-aside {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.3;
+  color: var(--ink-soft);
+  padding: 18px 0;
+  margin: 8px 0 18px;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  max-width: 36ch;
+}
+
+.signature-block {
+  margin-top: 56px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 40px;
+  align-items: end;
+  padding-top: 32px;
+  border-top: 1px solid var(--rule);
+}
+.signature-block .sig {
+  font-family: "Caveat", "Instrument Serif", cursive;
+  font-size: 56px;
+  line-height: 0.9;
+  color: var(--accent-2);
+  transform: rotate(-3deg);
+}
+.signature-block .who {
+  text-align: right;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  line-height: 1.7;
+}
+.signature-block .who .name {
+  display: block;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+/* ============================================================
+   Interstitial pull line (full-bleed quote)
+   ============================================================ */
+.pull-fullbleed {
+  padding: 200px 0;
+  text-align: center;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  position: relative;
+  overflow: hidden;
+}
+.pull-fullbleed::before {
+  content: "“";
+  position: absolute;
+  top: 12px; left: 50%; transform: translateX(-50%);
+  font-family: "Instrument Serif", serif;
+  font-size: 280px;
+  line-height: 1;
+  color: var(--accent-2);
+  opacity: 0.06;
+  pointer-events: none;
+}
+.pull-fullbleed blockquote {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(40px, 6.4vw, 110px);
+  line-height: 1.04;
+  letter-spacing: -0.012em;
+  max-width: 18ch;
+  margin: 0 auto;
+  color: var(--ink);
+}
+.pull-fullbleed blockquote .red { color: var(--accent-2); }
+.pull-fullbleed cite {
+  display: block;
+  margin-top: 56px;
+  font-style: normal;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.pull-fullbleed cite b { color: var(--ink); }
+
+/* ============================================================
+   Essay — "On the integration" type-only spread
+   ============================================================ */
+.essay {
+  padding: 200px 0;
+  position: relative;
+}
+.essay .shell { display: grid; grid-template-columns: 220px 1fr; gap: 80px; }
+@media (max-width: 980px) { .essay .shell { grid-template-columns: 1fr; gap: 24px; } }
+
+.essay .head-marg {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  display: flex; flex-direction: column; gap: 16px;
+  position: sticky; top: 120px; align-self: start;
+}
+.essay .head-marg .roman {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 36px;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--accent-2);
+  line-height: 1;
+}
+.essay .head-marg::after {
+  content: "";
+  width: 36px; height: 1px;
+  background: var(--accent-2);
+}
+
+.essay .essay-body { max-width: 56ch; }
+.essay .title {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5.2vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.014em;
+  margin-bottom: 40px;
+}
+.essay .title .it { font-style: italic; color: var(--accent); }
+.essay .title .red { font-style: italic; color: var(--accent-2); }
+
+.essay .essay-body p {
+  font-family: "Newsreader", "EB Garamond", Georgia, serif;
+  font-size: 19px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+  color: var(--ink);
+}
+.essay .essay-body p:first-of-type::first-letter {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 96px;
+  line-height: 0.82;
+  float: left;
+  padding: 8px 14px 0 0;
+  color: var(--accent-2);
+}
+
+/* The "equation" — type set as a literary diagram */
+.diagram {
+  margin: 56px 0 24px;
+  padding: 40px 0;
+  border-top: 1px solid var(--ink);
+  border-bottom: 1px solid var(--ink);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.diagram .line {
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(28px, 3.2vw, 44px);
+  line-height: 1.1;
+  letter-spacing: -0.005em;
+}
+.diagram .line .lhs {
+  font-style: italic;
+  color: var(--accent-2);
+  display: inline-block;
+  min-width: 8ch;
+}
+.diagram .line .op {
+  font-family: "JetBrains Mono", monospace;
+  font-style: normal;
+  font-size: 16px;
+  color: var(--ink-mute);
+  margin: 0 12px;
+  vertical-align: middle;
+}
+.diagram .line .rhs {
+  color: var(--ink);
+}
+.diagram .result {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(34px, 4.4vw, 64px);
+  line-height: 1.06;
+  color: var(--accent);
+  margin-top: 20px;
+}
+.diagram .result .arrow {
+  font-family: "JetBrains Mono", monospace;
+  font-style: normal;
+  font-size: 18px;
+  color: var(--ink-mute);
+  margin-right: 16px;
+  vertical-align: middle;
+}
+
+/* ============================================================
+   Faculty — "Constellation" of universities
+   ============================================================ */
+.constellation {
+  padding: 200px 0;
+  border-top: 1px solid var(--rule);
+  position: relative;
+}
+.constellation .head {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: 32px;
+  padding-bottom: 32px;
+  border-bottom: 1px solid var(--ink);
+  margin-bottom: 64px;
+}
+.constellation .head h2 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5.6vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.014em;
+  max-width: 18ch;
+}
+.constellation .head h2 .it { font-style: italic; color: var(--accent); }
+.constellation .head h2 .red { font-style: italic; color: var(--accent-2); }
+.constellation .head .meta {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  text-align: right;
+  line-height: 1.7;
+}
+.constellation .head .meta .roman {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 28px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--accent-2);
+  display: block;
+  margin-bottom: 2px;
+}
+
+.coords-list { list-style: none; display: flex; flex-direction: column; }
+.coords-list li {
+  display: grid;
+  grid-template-columns: 80px 1fr auto 90px;
+  gap: 32px;
+  align-items: baseline;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+  transition: padding 500ms cubic-bezier(.2,.7,.2,1), background 400ms ease;
+  cursor: default;
+  position: relative;
+}
+.coords-list li:hover { padding-left: 16px; background: linear-gradient(to right, transparent, var(--paper-edge), transparent); }
+.coords-list li .lat {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--ink-mute);
+}
+.coords-list li .uni {
+  font-family: "Instrument Serif", serif;
+  font-size: clamp(26px, 2.8vw, 42px);
+  line-height: 1.05;
+  letter-spacing: -0.005em;
+  transition: color 400ms ease, font-style 400ms ease;
+}
+.coords-list li:hover .uni { color: var(--accent-2); font-style: italic; }
+.coords-list li .city {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.coords-list li .flag {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 18px;
+  color: var(--accent);
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .coords-list li { grid-template-columns: 60px 1fr auto; gap: 16px; }
+  .coords-list li .city { display: none; }
+}
+
+/* ============================================================
+   Partner index — a vertical typographic list (no marquee)
+   ============================================================ */
+.partner-index {
+  padding: 200px 0;
+  background: var(--accent-deep);
+  color: var(--paper);
+  position: relative;
+  overflow: hidden;
+}
+.partner-index::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 0%, #ffffff10, transparent 50%),
+    radial-gradient(ellipse at 100% 100%, #ffffff06, transparent 55%);
+  pointer-events: none;
+}
+.partner-index .shell { position: relative; z-index: 1; max-width: 980px; }
+
+.partner-index .top-mark {
+  display: flex; justify-content: space-between;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #FFFFFFA0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #FFFFFF22;
+  margin-bottom: 80px;
+}
+.partner-index .top-mark .roman {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #E2B8BD;
+}
+
+.partner-index h2 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(40px, 5.4vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.014em;
+  margin-bottom: 64px;
+  max-width: 22ch;
+}
+.partner-index h2 .it { font-style: italic; color: #E2B8BD; }
+
+.partners-list { list-style: none; display: flex; flex-direction: column; }
+.partners-list li {
+  padding: 22px 0;
+  border-bottom: 1px solid #FFFFFF18;
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  gap: 28px;
+  align-items: baseline;
+}
+.partners-list li .n {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  color: #FFFFFF70;
+}
+.partners-list li .name {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(28px, 3.4vw, 52px);
+  line-height: 1;
+  letter-spacing: -0.005em;
+  color: var(--paper);
+  transition: color 400ms ease, transform 600ms cubic-bezier(.2,.7,.2,1);
+}
+.partners-list li:hover .name { color: var(--accent-soft); transform: translateX(6px); }
+.partners-list li .role {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFF90;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .partners-list li { grid-template-columns: 1fr; gap: 6px; }
+  .partners-list li .n { display: none; }
+  .partners-list li .role { text-align: left; }
+}
+
+/* ============================================================
+   The Grounds — full-bleed aerial with cartographic overlay
+   ============================================================ */
+.grounds {
+  position: relative;
+  height: 110vh;
+  min-height: 720px;
+  overflow: hidden;
+}
+.grounds .bg {
+  position: absolute; inset: 0;
+  overflow: hidden;
+}
+.grounds .bg image-slot {
+  width: 100%; height: 100%;
+  filter: contrast(1.05) saturate(0.55) brightness(0.7);
+  animation: kenBurns 60s ease-in-out infinite alternate;
+}
+.grounds::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 79px, #FFFFFF10 79px 80px),
+    repeating-linear-gradient(90deg, transparent 0 79px, #FFFFFF10 79px 80px),
+    linear-gradient(180deg, #00000040, #00000080);
+  z-index: 2;
+}
+.grounds .shell {
+  position: relative;
+  z-index: 3;
+  padding-top: 120px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 32px;
+  color: #fff;
+}
+.grounds .top {
+  display: flex; justify-content: space-between;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #FFFFFFB0;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #FFFFFF30;
+}
+.grounds .top .roman {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--accent-soft);
+}
+
+.grounds h2 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(56px, 8.4vw, 156px);
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  align-self: end;
+  max-width: 16ch;
+  text-shadow: 0 4px 24px #00000040;
+}
+.grounds h2 .it { font-style: italic; color: var(--accent-soft); }
+
+/* Cartographic facility labels (positioned over the map) */
+.grounds .map-labels {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
+}
+.grounds .map-labels .pt {
+  position: absolute;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex; align-items: center; gap: 8px;
+  text-shadow: 0 1px 4px #00000080;
+}
+.grounds .map-labels .pt::before {
+  content: "";
+  width: 6px; height: 6px;
+  border: 1px solid #fff;
+  background: var(--accent);
+}
+.grounds .map-labels .pt em {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 16px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--accent-soft);
+  margin-left: 6px;
+}
+
+/* Facility footer index */
+.grounds .footer-idx {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  padding-bottom: 40px;
+  align-self: end;
+  border-top: 1px solid #FFFFFF30;
+  padding-top: 18px;
+}
+@media (max-width: 880px) { .grounds .footer-idx { grid-template-columns: repeat(2, 1fr); } }
+.grounds .footer-idx .it {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 18px;
+  color: #fff;
+}
+.grounds .footer-idx .mn {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #FFFFFFA0;
+  margin-bottom: 4px;
+}
+
+/* ============================================================
+   P.S. — postscript (distance learning)
+   ============================================================ */
+.postscript {
+  padding: 160px 0;
+  border-top: 1px solid var(--rule);
+}
+.postscript .shell {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 880px) { .postscript .shell { grid-template-columns: 1fr; gap: 24px; } }
+
+.postscript .ps-mark {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: clamp(72px, 8vw, 128px);
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: var(--accent-2);
+}
+.postscript .ps-mark .small {
+  display: block;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  font-style: normal;
+  margin-top: 12px;
+}
+
+.postscript .ps-body p {
+  font-family: "Newsreader", "EB Garamond", Georgia, serif;
+  font-size: 22px;
+  line-height: 1.5;
+  color: var(--ink);
+  margin-bottom: 16px;
+  max-width: 46ch;
+}
+.postscript .ps-body p strong {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--accent);
+}
+.postscript .ps-body .where {
+  margin-top: 32px;
+  display: flex; gap: 40px; flex-wrap: wrap;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.postscript .ps-body .where span {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 28px;
+  color: var(--ink);
+}
+.postscript .ps-body .where span:nth-child(2n) { color: var(--accent-2); }
+.postscript .ps-body .signoff {
+  margin-top: 32px;
+  font-family: "Caveat", cursive;
+  font-size: 32px;
+  color: var(--accent-2);
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+/* ============================================================
+   Reply card — closing
+   ============================================================ */
+.reply-card {
+  padding: 160px 0 200px;
+}
+.reply-card .card {
+  position: relative;
+  border: 2px dashed var(--ink);
+  padding: 64px 56px;
+  background: var(--paper);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  border-radius: 4px;
+}
+@media (max-width: 880px) { .reply-card .card { grid-template-columns: 1fr; padding: 40px 24px; gap: 32px; } }
+
+/* Corner marks (cut here) */
+.reply-card .card::before {
+  content: "✂";
+  position: absolute;
+  top: -14px; left: 30px;
+  background: var(--paper);
+  padding: 0 8px;
+  font-size: 20px;
+  color: var(--ink);
+}
+
+.reply-card .stamp {
+  position: absolute;
+  top: 18px; right: 24px;
+  width: 100px;
+  border: 1px solid var(--ink);
+  padding: 8px 6px;
+  text-align: center;
+  font-family: "JetBrains Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.3;
+  transform: rotate(4deg);
+  background: var(--paper);
+}
+.reply-card .stamp .big {
+  display: block;
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-size: 22px;
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--accent-2);
+  margin: 4px 0 2px;
+}
+
+.reply-card .left h2 {
+  font-family: "Instrument Serif", serif;
+  font-weight: 400;
+  font-size: clamp(48px, 6.6vw, 104px);
+  line-height: 0.94;
+  letter-spacing: -0.015em;
+  max-width: 14ch;
+  margin-bottom: 32px;
+}
+.reply-card .left h2 .it { font-style: italic; color: var(--accent); }
+.reply-card .left h2 .red { font-style: italic; color: var(--accent-2); }
+.reply-card .left p.lede {
+  max-width: 38ch;
+}
+.reply-card .left .ctas {
+  margin-top: 32px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+
+.reply-card .right {
+  display: flex; flex-direction: column;
+  gap: 28px;
+}
+.reply-card .right .row {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 20px;
+  align-items: baseline;
+  border-bottom: 1px dotted var(--ink);
+  padding-bottom: 16px;
+}
+.reply-card .right .row .k {
+  font-family: "JetBrains Mono", monospace;
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.reply-card .right .row .v {
+  font-family: "Instrument Serif", serif;
+  font-size: 22px;
+  letter-spacing: -0.005em;
+  line-height: 1.3;
+}
+.reply-card .right .row .v.it { font-style: italic; color: var(--accent-2); }
+.reply-card .right .row .v a { color: inherit; }
+.reply-card .right .row .v a:hover { color: var(--accent); }
+
+/* ============================================================
+   Reveal animations local
+   ============================================================ */
+.r-up { opacity: 0; transform: translateY(28px); transition: opacity 900ms ease, transform 1100ms cubic-bezier(.2,.7,.2,1); }
+.r-up.in { opacity: 1; transform: none; }
+.r-up.d1 { transition-delay: 120ms; }
+.r-up.d2 { transition-delay: 240ms; }
+.r-up.d3 { transition-delay: 360ms; }
+.r-up.d4 { transition-delay: 480ms; }
+
+/* Drawn underline used in opener/headers */
+.u-draw { position: relative; }
+.u-draw::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -4px;
+  height: 1px; background: var(--accent-2);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform 1400ms cubic-bezier(.2,.7,.2,1) 200ms;
+}
+.u-draw.in::after { transform: scaleX(1); }
+
+/* Light fix-ups for image-slot in dark area */
+.partner-index image-slot, .grounds image-slot, .panel-image image-slot {
+  --is-empty-bg: #2a1d12;
+}
